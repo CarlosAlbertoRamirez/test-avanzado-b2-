@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen Completo de Español B1-B2 (50 Preguntas)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      background-color: #1e1e1e;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 800px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .header h2 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin: 0;
+      color: #ffffff;
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      color: #aaaaaa;
+      cursor: pointer;
+    }
+
+    .progress-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      background-color: #333333;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #888888;
+      border-radius: 3px;
+      width: 2%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-knob {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      background-color: #cccccc;
+      border-radius: 50%;
+      left: 2%;
+      transition: left 0.3s ease;
+    }
+
+    .stats {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-wrong {
+      background-color: #4a1f24;
+      color: #ff8a80;
+    }
+
+    .badge-correct {
+      background-color: #1b3a2b;
+      color: #b9f6ca;
+    }
+
+    .category-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: #3b82f6;
+      background-color: #1e293b;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .question-box {
+      margin-bottom: 25px;
+    }
+
+    .question-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #aaaaaa;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .option-btn {
+      background-color: #282828;
+      border: 1px solid #333333;
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #ffffff;
+      text-align: left;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover {
+      background-color: #333333;
+    }
+
+    .option-btn.correct {
+      border-color: #22c55e !important;
+      background-color: #14532d !important;
+      color: #b9f6ca !important;
+    }
+
+    .option-btn.wrong {
+      border-color: #ef4444 !important;
+      background-color: #7f1d1d !important;
+      color: #ff8a80 !important;
+    }
+
+    .hint-container {
+      margin-top: 15px;
+    }
+
+    .hint-toggle {
+      background: none;
+      border: none;
+      color: #aaaaaa;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hint-toggle:hover {
+      color: #ffffff;
+    }
+
+    .hint-content {
+      margin-top: 10px;
+      padding: 12px 16px;
+      background-color: #252525;
+      border-left: 3px solid #3b82f6;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #cccccc;
+      display: none;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .nav-btn {
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .btn-back {
+      background-color: #2a2a2a;
+      color: #ffffff;
+    }
+
+    .btn-back:hover {
+      background-color: #383838;
+    }
+
+    .btn-next {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
+
+    .btn-next:hover {
+      background-color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <div class="header">
+    <h2>Examen Completo de Español B1-B2 (50 Preguntas)</h2>
+    <div class="icons">
+      <span>🔗</span>
+      <span>✕</span>
+    </div>
+  </div>
+
+  <!-- Progress Bar & Stats -->
+  <div class="progress-bar-container">
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+      <div class="progress-knob" id="progress-knob"></div>
+    </div>
+    <div class="stats">
+      <span id="counter-text">1 de 50</span>
+      <span class="badge badge-wrong">✕ <span id="wrong-count">0</span></span>
+      <span class="badge badge-correct">✓ <span id="correct-count">0</span></span>
+    </div>
+  </div>
+
+  <!-- Question Content -->
+  <div class="question-box">
+    <div class="category-tag" id="cat-tag">Categoría</div>
+    <div class="question-title" id="q-number">Pregunta 1</div>
+    <div class="question-text" id="q-text">Cargando pregunta...</div>
+
+    <div class="options-container" id="options-box"></div>
+
+    <div class="hint-container">
+      <button class="hint-toggle" onclick="toggleHint()">Pista <span id="arrow">▼</span></button>
+      <div class="hint-content" id="hint-text"></div>
+    </div>
+  </div>
+
+  <!-- Footer Navigation -->
+  <div class="footer">
+    <button class="nav-btn btn-back" onclick="prevQuestion()">Atrás</button>
+    <button class="nav-btn btn-next" onclick="nextQuestion()">Siguiente</button>
+  </div>
+</div>
+
+<script>
+  const examData = [
+    // Pronombres Relativos
+    { id: 1, categoria: "Pronombres Relativos", pregunta: "El apartamento _________ ventanas dan al parque es el más caro de la zona.", opciones: ["a) cuyo", "b) cuyas", "c) donde", "d) el cual"], respuesta: 1, pista: "Pronombre posesivo relativo que concuerda en género y número con el sustantivo que le sigue ('ventanas', femenino plural)." },
+    { id: 2, categoria: "Pronombres Relativos", pregunta: "La mujer a _________ viste ayer en la biblioteca es la nueva profesora de literatura.", opciones: ["a) cuyo", "b) quien", "c) cuya", "d) donde"], respuesta: 1, pista: "Se refiere a una persona específica precedida de la preposición 'a'." },
+    { id: 3, categoria: "Pronombres Relativos", pregunta: "No entiendo la razón por _________ se fue de la reunión sin avisar a nadie.", opciones: ["a) quien", "b) donde", "c) la que", "d) cuál"], respuesta: 2, pista: "Relativo precedido por la preposición 'por' que se refiere a 'la razón'." },
+    { id: 4, categoria: "Pronombres Relativos", pregunta: "_________ me molesta de este trabajo es la falta de organización.", opciones: ["a) El que", "b) Lo que", "c) Que", "d) Cuyo"], respuesta: 1, pista: "Usa el neutro para referirte a una situación o concepto abstracto de manera general." },
+    { id: 5, categoria: "Pronombres Relativos", pregunta: "Este es el informe sobre el _________ te hablé la semana pasada.", opciones: ["a) quienes", "b) que", "c) quien", "d) cuyo"], respuesta: 1, pista: "Estructura estándar de relativo: 'el + que' tras una preposición." },
+    { id: 6, categoria: "Pronombres Relativos", pregunta: "Los alumnos, _________ aprobaron el examen, recibieron un certificado especial.", opciones: ["a) los cuales", "b) cuyos", "c) cuyo", "d) quien"], respuesta: 0, pista: "Relativo formal para oraciones explicativas entre comas referido a 'los alumnos'." },
+
+    // Perífrasis Verbales
+    { id: 7, categoria: "Perífrasis Verbales", pregunta: "A pesar de la lluvia, los niños _________ jugando en el jardín.", opciones: ["a) siguen", "b) quieren de", "c) han de", "d) están de"], respuesta: 0, pista: "Perífrasis 'seguir + gerundio' que indica la continuidad de una acción." },
+    { id: 8, categoria: "Perífrasis Verbales", pregunta: "María _________ trabajando en esta empresa desde hace más de cinco años.", opciones: ["a) lleva", "b) tiene", "c) viene de", "d) está por"], respuesta: 0, pista: "Perífrasis 'llevar + gerundio' expresando la duración de una acción que continúa." },
+    { id: 9, categoria: "Perífrasis Verbales", pregunta: "Cuando escuchó la broma, el público _________ a reír inmediatamente.", opciones: ["a) dejó", "b) rompió", "c) terminó", "d) se puso"], respuesta: 3, pista: "Perífrasis 'ponerse a + infinitivo' para expresar el inicio progresivo o voluntario de una acción." },
+    { id: 10, categoria: "Perífrasis Verbales", pregunta: "Al enterarse de la triste noticia, ella _________ a llorar desconsoladamente.", opciones: ["a) rompió", "b) dejó", "c) trató", "d) aprendió"], respuesta: 0, pista: "Perífrasis 'romper a + infinitivo' para expresar el inicio repentino de una reacción emocional." },
+    { id: 11, categoria: "Perífrasis Verbales", pregunta: "Tranquilo, la situación _________ a mejorar poco a poco con el tiempo.", opciones: ["a) va", "b) debe de", "c) acaba de", "d) lleva"], respuesta: 0, pista: "Perífrasis 'ir a + infinitivo' con valor de futuro o desarrollo paulatino." },
+    { id: 12, categoria: "Perífrasis Verbales", pregunta: "No entiendo por qué _________ diciendo mentiras sobre lo que ocurrió ayer.", opciones: ["a) andas", "b) debes", "c) acabas", "d) piensas"], respuesta: 0, pista: "Perífrasis 'andar + gerundio' con matiz de conducta repetitiva, vaga o reprobable." },
+
+    // Formas del Verbo Haber
+    { id: 13, categoria: "Formas del Verbo Haber", pregunta: "El año pasado _________ muchos problemas económicos en la región.", opciones: ["a) hubieron", "b) hubo", "c) habían", "d) ha habido"], respuesta: 1, pista: "El verbo haber impersonal que indica existencia en pasado perfecto no se pluraliza." },
+    { id: 14, categoria: "Formas del Verbo Haber", pregunta: "Si hubieras llegado a tiempo, no _________ que esperar afuera tanto tiempo.", opciones: ["a) habrías tenido", "b) habías tenido", "c) has tenido", "d) tengas"], respuesta: 0, pista: "Condicional compuesto en la apódosis de una condición irreal en el pasado." },
+    { id: 15, categoria: "Formas del Verbo Haber", pregunta: "Fue sorprendente que no _________ nadie en la sala cuando empezó la función.", opciones: ["a) hubiera", "b) hay", "c) había", "d) habiendo"], respuesta: 0, pista: "Pretérito imperfecto de subjuntivo tras una estructura impersonal de valoración en pasado ('fue sorprendente que')." },
+    { id: 16, categoria: "Formas del Verbo Haber", pregunta: "Ojalá que esta noche _________ suficiente comida para todos los invitados de la fiesta.", opciones: ["a) haya", "b) hay", "c) había", "d) habrá"], respuesta: 0, pista: "Presente de subjuntivo expresando deseo de existencia respecto al presente o futuro." },
+    { id: 17, categoria: "Formas del Verbo Haber", pregunta: "En la manifestación de ayer _________ miles de personas protestando.", opciones: ["a) hubieron", "b) había", "c) habían", "d) han habido"], respuesta: 1, pista: "Pretérito imperfecto impersonal para describir un escenario pasado (no se usa plural)." },
+    { id: 18, categoria: "Formas del Verbo Haber", pregunta: "Para cuando tú llegues al aeropuerto, el avión ya _________ despegado.", opciones: ["a) habrá", "b) haya", "c) había", "d) hubiere"], respuesta: 0, pista: "Futuro compuesto para expresar una acción completada anterior a otro momento futuro." },
+
+    // Verbos de Cambio
+    { id: 19, categoria: "Verbos de Cambio", pregunta: "Tras años de esfuerzo y estudio constante, finalmente _________ médico.", opciones: ["a) se convirtió", "b) se hizo", "c) se puso", "d) se quedó"], respuesta: 1, pista: "Verbo de cambio 'hacerse' para transformación voluntaria mediante esfuerzo profesional o personal." },
+    { id: 20, categoria: "Verbos de Cambio", pregunta: "Cuando vio la sombra en el pasillo, ella _________ muy nerviosa.", opciones: ["a) se puso", "b) se convirtió en", "c) se transformó en", "d) se hizo a"], respuesta: 0, pista: "Verbo de cambio 'ponerse' para estados de ánimo o de salud pasajeros y rápidos." },
+    { id: 21, categoria: "Verbos de Cambio", pregunta: "Desde que ganó el premio de la lotería, él _________ insoportable y egoísta.", opciones: ["a) se convirtió", "b) se puso a", "c) se volvió", "d) quedó de"], respuesta: 2, pista: "Verbo de cambio 'volverse' para un cambio cualitativo profundo en el carácter." },
+    { id: 22, categoria: "Verbos de Cambio", pregunta: "Con el paso de los años y mucha dedicación, el pequeño negocio _________ en una gran multinacional.", opciones: ["a) se convirtió", "b) se hizo", "c) se volvió", "d) se puso"], respuesta: 0, pista: "Verbo de cambio 'convertirse en' para transformaciones radicales de naturaleza." },
+    { id: 23, categoria: "Verbos de Cambio", pregunta: "El anciano _________ sordo tras trabajar durante décadas en la fábrica.", opciones: ["a) se convirtió", "b) se quedó", "c) se puso de", "d) se hizo a"], respuesta: 1, pista: "Verbo de cambio 'quedarse' para la pérdida imprevista o gradual de facultades o propiedades." },
+    { id: 24, categoria: "Verbos de Cambio", pregunta: "Después de tanto pelear y trabajar, finalmente _________ ser el director de la empresa.", opciones: ["a) llegó a", "b) se convirtió en", "c) se volvió", "d) se puso a"], respuesta: 0, pista: "Estructura 'llegar a ser' para un cambio culminante tras un proceso largo." },
+
+    // Usos de SE
+    { id: 25, categoria: "Usos de SE", pregunta: "En España _________ vive muy bien gracias al clima y la gastronomía.", opciones: ["a) se (impersonal)", "b) se (pasiva refleja)", "c) se (reflexivo)", "d) se (recíproco)"], respuesta: 0, pista: "Estructura 'se + verbo intransitivo en 3.ª persona singular' sin sujeto explícito." },
+    { id: 26, categoria: "Usos de SE", pregunta: "En esa librería antigua _________ venden libros de segunda mano a muy buen precio.", opciones: ["a) se (impersonal)", "b) se (pasiva refleja)", "c) se (falso se / pronominal)", "d) se (reflexivo)"], respuesta: 1, pista: "El sujeto es 'libros de segunda mano' (plural), por lo que concuerda en plural ('venden')." },
+    { id: 27, categoria: "Usos de SE", pregunta: "No le des más dinero a Juan; ya _________ lo diste ayer por la tarde.", opciones: ["a) se (sustituto de le/les)", "b) se (reflexivo)", "c) se (pronominal)", "d) se (impersonal)"], respuesta: 0, pista: "Uso de 'se' variante indirecta para evitar la cacofonía con 'lo' (se lo diste = le lo diste)." },
+    { id: 28, categoria: "Usos de SE", pregunta: "Los dos hermanos no se hablaban desde hacía años, pero ayer _________ abrazaron y hicieron las paces.", opciones: ["a) se (recíproco)", "b) se (reflexivo)", "c) se (impersonal)", "d) se (pasiva refleja)"], respuesta: 0, pista: "Acción mutua entre dos o más sujetos (el uno al otro)." },
+    { id: 29, categoria: "Usos de SE", pregunta: "Mi abuelo siempre _________ queja del ruido de los coches en la calle.", opciones: ["a) se (pronominal inherente)", "b) se (reflexivo)", "c) se (impersonal)", "d) se (pasiva refleja)"], respuesta: 0, pista: "Forma parte inseparable del verbo 'quejarse'." },
+    { id: 30, categoria: "Usos de SE", pregunta: "Ella _________ lavó las manos cuidadosamente antes de cocinar.", opciones: ["a) se (reflexivo)", "b) se (impersonal)", "c) se (sustituto de le)", "d) se (recíproco)"], respuesta: 0, pista: "La acción del sujeto recae sobre una parte del propio cuerpo." },
+
+    // Conectores Intermedios
+    { id: 31, categoria: "Conectores Intermedios", pregunta: "Salió a pasear por el parque _________ la intensa lluvia que caía sobre la ciudad.", opciones: ["a) a pesar de", "b) aunque", "c) por lo tanto", "d) ya que"], respuesta: 0, pista: "Conector concesivo seguido directamente por un grupo nominal ('la intensa lluvia')." },
+    { id: 32, categoria: "Conectores Intermedios", pregunta: "Estudió sin descanso durante semanas; _________, logró aprobar el examen con la nota más alta.", opciones: ["a) por lo tanto", "b) sin embargo", "c) ya que", "d) a no ser que"], respuesta: 0, pista: "Conector de consecuencia lógica." },
+    { id: 33, categoria: "Conectores Intermedios", pregunta: "No fuimos de excursión a la montaña _________ hacía muchísimo frío.", opciones: ["a) debido a que", "b) a pesar de que", "c) por consiguiente", "d) con tal de que"], respuesta: 0, pista: "Conector causal compuesto introduciendo una causa." },
+    { id: 34, categoria: "Conectores Intermedios", pregunta: "El proyecto es muy interesante; _________, requiere una inversión de capital demasiado alta.", opciones: ["a) no obstante", "b) porque", "c) así que", "d) puesto que"], respuesta: 0, pista: "Conector de oposición o contraste formal equivalante a 'sin embargo'." },
+    { id: 35, categoria: "Conectores Intermedios", pregunta: "Iremos a la playa este fin de semana _________ no llueva durante la mañana.", opciones: ["a) siempre y cuando", "b) porque", "c) por lo que", "d) dado que"], respuesta: 0, pista: "Conector condicional que exige el uso del modo subjuntivo ('no llueva')." },
+    { id: 36, categoria: "Conectores Intermedios", pregunta: "Te presto mis apuntes de clase _________ puedas preparar el examen de mañana.", opciones: ["a) a fin de que", "b) ya que", "c) debido a", "d) por consiguiente"], respuesta: 0, pista: "Conector de finalidad que requiere verbo en subjuntivo ('puedas')." },
+
+    // Imperativos y Pronombres Combinados
+    { id: 37, categoria: "Imperativos y Pronombres", pregunta: "¿El libro sobre la mesa? Por favor, _________ ahora mismo a tu hermano.", opciones: ["a) dáselo", "b) se lo da", "c) dale lo", "d) daselo tú"], respuesta: 0, pista: "Imperativo afirmativo 'da' + pronombre indirecto 'se' + pronombre directo 'lo' en una sola palabra esdrújula." },
+    { id: 38, categoria: "Imperativos y Pronombres", pregunta: "Chicos, las llaves del coche están en la entrada. ¡No _________ olviden!", opciones: ["a) se las", "b) las se", "c) las les", "d) les las"], respuesta: 0, pista: "Imperativo negativo para ustedes con pronombres 'se' (CI) y 'las' (CD) antes del verbo." },
+    { id: 39, categoria: "Imperativos y Pronombres", pregunta: "Señor Martínez, necesito la carta confidencial en mi escritorio. _________ ahí, por favor.", opciones: ["a) Póngamela", "b) Me la ponga", "c) Pongasela", "d) Pónmela"], respuesta: 0, pista: "Imperativo de usted ('ponga') con los pronombres 'me' (a mí) y 'la' (la carta) adjuntos." },
+    { id: 40, categoria: "Imperativos y Pronombres", pregunta: "Si tienes el documento escaneado y quieres mandármelo, por favor, ¡_________ inmediatamente por correo!", opciones: ["a) envíaselo", "b) envíasela", "c) envíamelo", "d) se lo envía"], respuesta: 2, pista: "Imperativo de tú ('envía') + 'me' (a mí) + 'lo' (el documento)." },
+    { id: 41, categoria: "Imperativos y Pronombres", pregunta: "Niños, es hora de comer. ¡_________ las manos inmediatamente!", opciones: ["a) Lávense", "b) Lavarse", "c) Laven se", "d) Lávate"], respuesta: 0, pista: "Imperativo afirmativo para ustedes del verbo reflexivo 'lavarse'." },
+    { id: 42, categoria: "Imperativos y Pronombres", pregunta: "No les digas la verdad todavía a tus padres, ¡no _________ digas hoy!", opciones: ["a) se la", "b) la se", "c) les la", "d) te la"], respuesta: 0, pista: "Imperativo negativo: orden de pronombres 'se' + 'la' separados antes del verbo." },
+    { id: 43, categoria: "Imperativos y Pronombres", pregunta: "Si ves a Laura en la oficina, por favor _________ este paquete de mi parte.", opciones: ["a) entrégaselo", "b) entrégale lo", "c) se lo entrega", "d) entregaselo"], respuesta: 0, pista: "Imperativo de tú ('entrega') + 'se' (a Laura) + 'lo' (el paquete) con tilde ortográfica." },
+
+    // Estilo Indirecto
+    { id: 44, categoria: "Estilo Indirecto", pregunta: "Juan dijo: 'Mañana iré al médico temprano'. → Juan dijo que al día siguiente _________ al médico temprano.", opciones: ["a) iría", "b) irá", "c) fue", "d) fuera"], respuesta: 0, pista: "El futuro simple en estilo directo cambia a condicional simple cuando el verbo principal está en pasado." },
+    { id: 45, categoria: "Estilo Indirecto", pregunta: "María me pidió: 'Llámame cuando llegues a casa'. → María me pidió que la _________ cuando llegara a casa.", opciones: ["a) llamara", "b) llame", "c) llamaría", "d) llamé"], respuesta: 0, pista: "Una petición u orden en imperativo pasa a pretérito imperfecto de subjuntivo en pasado." },
+    { id: 46, categoria: "Estilo Indirecto", pregunta: "El profesor nos advirtió: 'Estudien mucho para el examen final'. → El profesor nos advirtió que _________ mucho para el examen final.", opciones: ["a) estudiáramos", "b) estudiemos", "c) estudiaríamos", "d) estudian"], respuesta: 0, pista: "La instrucción en imperativo/subjuntivo pasa a pretérito imperfecto de subjuntivo." },
+    { id: 47, categoria: "Estilo Indirecto", pregunta: "Pedro me preguntó: '¿Dónde has comprado esa chaqueta?'. → Pedro me preguntó dónde _________ comprado esa chaqueta.", opciones: ["a) había", "b) sea", "c) haya", "d) habría"], respuesta: 0, pista: "El pretérito perfecto compuesto ('has comprado') cambia a pretérito pluscuamperfecto ('había comprado')." },
+    { id: 48, categoria: "Estilo Indirecto", pregunta: "Ella me aseguró: 'Ya he terminado el trabajo'. → Ella me dijo que ya _________ el trabajo.", opciones: ["a) había terminado", "b) terminó de", "c) haya terminado", "d) terminaría"], respuesta: 0, pista: "El pretérito perfecto compuesto cambia a pretérito pluscuamperfecto de indicativo." },
+    { id: 49, categoria: "Estilo Indirecto", pregunta: "El jefe ordenó: 'No salgan de la oficina antes de las 5'. → El jefe ordenó que no _________ de la oficina antes de las 5.", opciones: ["a) salieran", "b) salgan", "c) saldrían", "d) salieron"], respuesta: 0, pista: "Orden negativa expresada en subjuntivo introducida por un verbo de mando en pasado." },
+    { id: 50, categoria: "Estilo Indirecto", pregunta: "Mi amigo me dijo: 'Ayer estuve enfermo en casa'. → Mi amigo me dijo que el día anterior _________ enfermo en casa.", opciones: ["a) había estado", "b) esté", "c) haya estado", "d) estaría"], respuesta: 0, pista: "El pretérito indefinido ('estuve') cambia generalmente a pretérito pluscuamperfecto ('había estado') al pasar a estilo indirecto." }
+  ];
+
+  let currentIndex = 0;
+  let userAnswers = Array(examData.length).fill(null);
+  let correctCount = 0;
+  let wrongCount = 0;
+
+  function loadQuestion(index) {
+    const q = examData[index];
+    document.getElementById("cat-tag").innerText = q.categoria;
+    document.getElementById("q-number").innerText = `Pregunta ${index + 1}`;
+    document.getElementById("q-text").innerText = q.pregunta;
+    document.getElementById("hint-text").innerText = q.pista;
+    document.getElementById("hint-text").style.display = "none";
+    document.getElementById("arrow").innerText = "▼";
+
+    // Progreso
+    const progressPercent = ((index + 1) / examData.length) * 100;
+    document.getElementById("progress-fill").style.width = `${progressPercent}%`;
+    document.getElementById("progress-knob").style.left = `${progressPercent}%`;
+    document.getElementById("counter-text").innerText = `${index + 1} de ${examData.length}`;
+
+    // Opciones
+    const optionsBox = document.getElementById("options-box");
+    optionsBox.innerHTML = "";
+
+    q.opciones.forEach((opt, optIndex) => {
+      const btn = document.createElement("button");
+      btn.className = "option-btn";
+      btn.innerText = opt;
+
+      if (userAnswers[index] !== null) {
+        if (optIndex === q.respuesta) {
+          btn.classList.add("correct");
+        }
+        if (userAnswers[index] === optIndex && optIndex !== q.respuesta) {
+          btn.classList.add("wrong");
+        }
+      }
+
+      btn.onclick = () => selectOption(optIndex);
+      optionsBox.appendChild(btn);
+    });
+  }
+
+  function selectOption(optIndex) {
+    if (userAnswers[currentIndex] !== null) return;
+
+    userAnswers[currentIndex] = optIndex;
+    const q = examData[currentIndex];
+
+    if (optIndex === q.respuesta) {
+      correctCount++;
+    } else {
+      wrongCount++;
+    }
+
+    document.getElementById("correct-count").innerText = correctCount;
+    document.getElementById("wrong-count").innerText = wrongCount;
+
+    loadQuestion(currentIndex);
+  }
+
+  function toggleHint() {
+    const hint = document.getElementById("hint-text");
+    const arrow = document.getElementById("arrow");
+    if (hint.style.display === "block") {
+      hint.style.display = "none";
+      arrow.innerText = "▼";
+    } else {
+      hint.style.display = "block";
+      arrow.innerText = "▲";
+    }
+  }
+
+  function nextQuestion() {
+    if (currentIndex < examData.length - 1) {
+      currentIndex++;
+      loadQuestion(currentIndex);
+    }
+  }
+
+  function prevQuestion() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      loadQuestion(currentIndex);
+    }
+  }
+
+  // Inicializar examen
+  loadQuestion(0);
+</script>
+
+</body>
+</html>
